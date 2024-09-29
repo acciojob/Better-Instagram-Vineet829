@@ -10,14 +10,15 @@ parent.addEventListener("dragover", (e) => {
 });
 
 parent.addEventListener("drop", (e) => {
-   
+    e.preventDefault();
 
-    
+    if (item !== e.target && e.target.classList.contains("image")) {
         let endId = e.target.id;
-	    let endText = e.target.textContent
+        let endText = e.target.textContent;
         e.target.id = item.id;
-	    e.target.innerHTML = item.innerHTML
-	    item.id = endId
-	    item.textContent = endText
-         
+        e.target.textContent = item.textContent;
+        item.id = endId;
+        item.textContent = endText;
+    }
 });
+
