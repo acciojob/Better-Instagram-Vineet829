@@ -12,7 +12,7 @@ parent.addEventListener('dragend', (e) => {
 });
 
 parent.addEventListener('dragover', (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
 });
 
 parent.addEventListener('drop', (e) => {
@@ -21,7 +21,6 @@ parent.addEventListener('drop', (e) => {
         const allImages = Array.from(parent.children);
         const draggedIndex = allImages.indexOf(draggedElement);
         const targetIndex = allImages.indexOf(e.target);
-        
         
         if (draggedIndex < targetIndex) {
             parent.insertBefore(draggedElement, e.target.nextSibling);
