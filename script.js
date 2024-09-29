@@ -1,24 +1,28 @@
-let parent = document.querySelector("#parent");
-let item = null;
+let draggedElement = null;
 
-parent.addEventListener("dragstart", (e) => {
-    item = e.target;
+const parent = document.getElementById('parent');
+
+parent.addEventListener('dragstart', (e) => {
+    draggedElement = e.target;
+    e.target.style.opacity = 0.5;
 });
 
-parent.addEventListener("dragover", (e) => {
+parent.addEventListener('dragend', (e) => {
+    e.target.style.opacity = "";
+});
+
+parent.addEventListener('dragover', (e) => {
     e.preventDefault();
 });
 
-parent.addEventListener("drop", (e) => {
+parent.addEventListener('drop', (e) => {
     e.preventDefault();
-
-    if (item !== e.target && e.target.classList.contains("image")) {
-        let endId = e.target.id;
-        let endText = e.target.textContent;
-        e.target.id = item.id;
-        e.target.textContent = item.textContent;
-        item.id = endId;
-        item.textContent = endText;
+    if (e.target.classList.contains('image') && draggedElement !== e.target) {
+        const allImages = Array.from(parent.children);
+        const draggedIndex = allImages.indexOf(draggedElement);
+        const targetIndex = allImages.indexOf(e.target);
+        parent.insertBefore(draggedElement, targetIndex > draggedIndex ? e.target.nextSibling : e.target);
     }
 });
+
 
