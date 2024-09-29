@@ -4,15 +4,15 @@ const parent = document.getElementById('parent');
 
 parent.addEventListener('dragstart', (e) => {
     draggedElement = e.target;
-    e.target.style.opacity = 0.5;
+    e.target.classList.add('dragging');
 });
 
 parent.addEventListener('dragend', (e) => {
-    e.target.style.opacity = "";
+    e.target.classList.remove('dragging');
 });
 
 parent.addEventListener('dragover', (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
 });
 
 parent.addEventListener('drop', (e) => {
@@ -21,8 +21,13 @@ parent.addEventListener('drop', (e) => {
         const allImages = Array.from(parent.children);
         const draggedIndex = allImages.indexOf(draggedElement);
         const targetIndex = allImages.indexOf(e.target);
-        parent.insertBefore(draggedElement, targetIndex > draggedIndex ? e.target.nextSibling : e.target);
+        
+        
+        if (draggedIndex < targetIndex) {
+            parent.insertBefore(draggedElement, e.target.nextSibling);
+        } else {
+            parent.insertBefore(draggedElement, e.target);
+        }
     }
 });
-
 
