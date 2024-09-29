@@ -1,19 +1,23 @@
 let parent = document.querySelector("#parent");
-var item = null
-var temp = null
-var item1 = null
+let item = null;
+
 parent.addEventListener("dragstart", (e) => {
-    item = e.target.id;  
-	temp = e.target
-    console.log(item);
+    item = e.target;
 });
 
 parent.addEventListener("dragover", (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
 });
 
 parent.addEventListener("drop", (e) => {
-    item1 = e.target.id; 
-     e.target.id = item
-	temp.id = item1
+   
+
+    
+        let endId = e.target.id;
+	    let endText = e.target.textContent
+        e.target.id = item.id;
+	    e.target.innerHTML = item.innerHTML
+	    item.id = endId
+	    item.textContent = endText
+         
 });
